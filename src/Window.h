@@ -22,6 +22,9 @@ public:
 
 	U::Texture& GetBuffer();
 
+	inline void* GetHandler() { return &m_handler; }
+	inline void* GetDisplay() { return m_display; }
+
 private:
 	int m_width;
 	int m_height;

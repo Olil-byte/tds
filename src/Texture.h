@@ -4,12 +4,16 @@
 namespace U
 {
 
-struct Texel
+union Texel
 {
-	char r;
-	char g;
-	char b;
-	char a;
+	struct 
+	{
+		char r;
+		char g;
+		char b;
+		char a;	
+	};
+	unsigned int v;
 };
 
 class Texture

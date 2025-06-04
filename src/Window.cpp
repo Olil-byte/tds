@@ -72,11 +72,11 @@ void U::Window::Display()
 {
 	for (auto it = m_buffer.Begin(); it != m_buffer.End(); ++it)
 	{
-		const Texel texel = *it;
-		Texel& pixel = *it;
-		pixel.b = texel.r;
-		pixel.r = texel.g;
-		pixel.g = texel.b;
+	  	const Texel texel = *it;
+	  	Texel& pixel = *it;
+	  	pixel.b = texel.r;
+	  	pixel.r = texel.g;
+	  	pixel.g = texel.b;
 	}
 
 	XPutImage(m_display, m_handler, m_gc, m_canvas, 0, 0, 0, 0, m_width, m_height);
