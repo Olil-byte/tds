@@ -15,7 +15,7 @@ int main(void)
 
 	while (true)
 	{
-		square->SetX(square->GetX() + 1);
+		square->SetY(square->GetY() + 1);
 		render.RenderObject(square);
 		window.Display();
 	}

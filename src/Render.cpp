@@ -20,10 +20,10 @@ void U::Render::RenderObject(const U::IRenderable* renderable)
 	for (auto it = texture.CBegin(); it != texture.CEnd(); ++it)
 	{
 		int x = renderable->GetX() + it.GetX();
-		int y = renderable->GetY() + it.GetY();
+		int y = output.GetHeight() - (renderable->GetY() + it.GetY());
 
-		/* Check if pixel is out of output borders*/
-		if (x < 0 || x >= output.GetWidth() || y < 0 || y >= output.GetHeight())
+		bool isOutOfBound = x < 0 || x >= output.GetWidth() || y < 0 || y >= output.GetHeight();
+		if (isOutOfBound)
 		{
 			continue;
 		}
