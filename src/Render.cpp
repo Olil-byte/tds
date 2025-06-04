@@ -23,7 +23,7 @@ void U::Render::RenderObject(const U::IRenderable* renderable)
 		int y = renderable->GetY() + it.GetY();
 
 		/* Check if pixel is out of output borders*/
-		if (x < 0 || x > output.GetWidth() || y < 0 || y > output.GetHeight())
+		if (x < 0 || x >= output.GetWidth() || y < 0 || y >= output.GetHeight())
 		{
 			continue;
 		}
