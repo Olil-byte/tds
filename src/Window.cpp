@@ -44,8 +44,8 @@ U::Window::Window(const char* title, unsigned int width, unsigned int height) : 
 		ZPixmap,
 		0,
 		(char*)m_buffer.GetData(),
-		width,
-		height,
+		m_width,
+		m_height,
 		32,
 		0
 	);
@@ -70,6 +70,15 @@ void U::Window::Hide()
 
 void U::Window::Display()
 {
+	for (auto it = m_buffer.Begin(); it != m_buffer.End(); ++it)
+	{
+		const Texel texel = *it;
+		Texel& pixel = *it;
+		pixel.b = texel.r;
+		pixel.r = texel.g;
+		pixel.g = texel.b;
+	}
+
 	XPutImage(m_display, m_handler, m_gc, m_canvas, 0, 0, 0, 0, m_width, m_height);
 	XFlush(m_display);
 }
@@ -78,3 +87,4 @@ U::Texture& U::Window::GetBuffer()
 {
 	return m_buffer;
 }
+

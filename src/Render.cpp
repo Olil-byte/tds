@@ -17,9 +17,6 @@ void U::Render::RenderObject(const U::IRenderable* renderable)
 	
 	const U::Texture& texture = renderable->GetTexture();
 
-	// U::Texture::Iterator& it = texture.Begin();
-	// const U::Texture::Iterator& end = texture.End();
-
 	for (auto it = texture.CBegin(); it != texture.CEnd(); ++it)
 	{
 		int x = renderable->GetX() + it.GetX();
@@ -32,7 +29,7 @@ void U::Render::RenderObject(const U::IRenderable* renderable)
 		}
 		else
 		{
-			output.GetPixel(x, y) = *it;
+			output.GetTexel(x, y) = *it;
 		}
 	} 	
 }

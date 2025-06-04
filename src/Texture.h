@@ -4,7 +4,7 @@
 namespace U
 {
 
-struct Pixel
+struct Texel
 {
 	char r;
 	char g;
@@ -24,10 +24,10 @@ public:
 	inline unsigned int GetWidth() const { return m_width; }
 	inline unsigned int GetHeight() const { return m_height; }
 
-	inline Pixel& GetPixel(unsigned int x, unsigned int y) { return m_data[y * m_width + x]; }
-	inline const Pixel& GetPixel(unsigned int x, unsigned int y) const { return m_data[y * m_width + x]; }
+	inline Texel& GetTexel(unsigned int x, unsigned int y) { return m_data[y * m_width + x]; }
+	inline const Texel& GetPixel(unsigned int x, unsigned int y) const { return m_data[y * m_width + x]; }
 
-	inline Pixel* GetData() { return m_data; } 
+	inline Texel* GetData() { return m_data; } 
 
 	class Iterator
 	{
@@ -39,11 +39,11 @@ public:
 		inline unsigned int GetX() const { return m_x; }
 		inline unsigned int GetY() const { return m_y; }
 		
-		Pixel& operator*();
-		const Pixel& operator*() const;
+		Texel& operator*();
+		const Texel& operator*() const;
 
-		Pixel* operator->();
-		const Pixel* operator->() const;
+		Texel* operator->();
+		const Texel* operator->() const;
 		
 		Iterator& operator++();
 		const Iterator& operator++() const;
@@ -69,7 +69,7 @@ private:
 	unsigned int m_width;
 	unsigned int m_height;
 	
-	Pixel* m_data;	
+	Texel* m_data;	
 };
 
 };

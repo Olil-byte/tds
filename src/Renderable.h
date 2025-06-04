@@ -30,9 +30,9 @@ public:
 		
 		for (auto it = m_texture.Begin(); it != m_texture.End(); ++it)
 		{
-			it->r = 128;
-			it->g = 128;
-			it->b = 128;
+			it->r = 255;
+			it->g = 0;
+			it->b = 0;
 			it->a = 255;
 		}
 	}

@@ -7,7 +7,7 @@ U::Texture::Texture(unsigned int width, unsigned int height)
 	m_width = width;
 	m_height = height;
 	
-	m_data = new Pixel[width * height];
+	m_data = new Texel[width * height];
 }
 
 U::Texture::~Texture()
@@ -33,24 +33,24 @@ U::Texture::Iterator::Iterator(const U::Texture* texture, unsigned int x, unsign
 	m_y = y;
 }
 
-U::Pixel& U::Texture::Iterator::operator*()
+U::Texel& U::Texture::Iterator::operator*()
 {
-	return m_texture->GetPixel(m_x, m_y);
+	return m_texture->GetTexel(m_x, m_y);
 }
 
-const U::Pixel& U::Texture::Iterator::operator*() const
+const U::Texel& U::Texture::Iterator::operator*() const
 {
-	return m_texture->GetPixel(m_x, m_y);
+	return m_texture->GetTexel(m_x, m_y);
 }
 
-U::Pixel* U::Texture::Iterator::operator->()
+U::Texel* U::Texture::Iterator::operator->()
 {
-	return &m_texture->GetPixel(m_x, m_y);
+	return &m_texture->GetTexel(m_x, m_y);
 }
 
-const U::Pixel* U::Texture::Iterator::operator->() const
+const U::Texel* U::Texture::Iterator::operator->() const
 {
-	return &m_texture->GetPixel(m_x, m_y);
+	return &m_texture->GetTexel(m_x, m_y);
 } 
 
 U::Texture::Iterator& U::Texture::Iterator::operator++()
