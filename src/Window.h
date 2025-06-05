@@ -22,8 +22,9 @@ public:
 
 	U::Texture& GetBuffer();
 
-	inline void* GetHandler() { return &m_handler; }
-	inline void* GetDisplay() { return m_display; }
+	/* X11-specific */
+	inline ::Window X11GetHandler() const { return m_handler; }
+	inline ::Display* X11GetDisplay() const { return m_display; }
 
 private:
 	int m_width;
