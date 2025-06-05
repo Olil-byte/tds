@@ -25,8 +25,8 @@ public:
 	Texture(const Texture& other) = delete;
 	Texture& operator=(const Texture& other) = delete;
 
-	inline unsigned int GetWidth() const { return m_width; }
-	inline unsigned int GetHeight() const { return m_height; }
+	inline unsigned short GetWidth() const { return m_width; }
+	inline unsigned short GetHeight() const { return m_height; }
 
 	inline Texel& GetTexel(unsigned int x, unsigned int y) { return m_data[y * m_width + x]; }
 	inline const Texel& GetPixel(unsigned int x, unsigned int y) const { return m_data[y * m_width + x]; }
@@ -70,8 +70,8 @@ public:
 	inline const Iterator CEnd() const { return Iterator(this, 0, m_height); }
 	
 private:
-	unsigned int m_width;
-	unsigned int m_height;
+	unsigned short m_width;
+	unsigned short m_height;
 	
 	Texel* m_data;	
 };
