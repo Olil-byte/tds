@@ -6,7 +6,7 @@ U::Render::Render(U::Window* context)
 	m_context = context;
 }
 
-void U::Render::RenderObject(const U::IRenderable* renderable)
+void U::Render::RenderObject(const U::IGameObject* object)
 {
 	U::Texture& output = m_context->GetBuffer();
 	for (auto it = output.Begin(); it != output.End(); ++it)
@@ -14,13 +14,12 @@ void U::Render::RenderObject(const U::IRenderable* renderable)
 		*it = { (char)255, (char)255, (char)255, (char)255 };
 	}
 	
-	
-	const U::Texture& texture = renderable->GetTexture();
+	const U::Texture& texture = object->GetTexture();
 
 	for (auto it = texture.CBegin(); it != texture.CEnd(); ++it)
 	{
-		int x = renderable->GetX() + it.GetX();
-		int y = output.GetHeight() - (renderable->GetY() + it.GetY());
+		int x = object->GetPosition().x + it.GetX();
+		int y = output.GetHeight() - (object->GetPosition().y + it.GetY());
 
 		bool isOutOfBound = x < 0 || x >= output.GetWidth() || y < 0 || y >= output.GetHeight();
 		if (isOutOfBound)
@@ -33,25 +32,3 @@ void U::Render::RenderObject(const U::IRenderable* renderable)
 		}
 	} 	
 }
-
-// void U::Render::RenderInto(U::Buffer& buffer)
-// {
-// 	int depth = buffer.GetDepth() / 8;
-// 
-// 	int height = buffer.GetHeight();
-// 	int width = buffer.GetWidth();
-// 
-// 	char* data = buffer.GetData();
-// 
-// 	/* Test */
-// 	for (int y = 0; y < height; y++)
-// 	{
-// 		for (int x = 0; x < width; x++)
-// 		{
-// 			data[(y * width + x) * depth] = 255 * (float)x / (float)width; /* Blue */
-// 			data[(y * width + x) * depth + 1] = 255 * (float)x / (float)width; /* Red */
-// 			data[(y * width + x) * depth + 2] = 255 * (float)y / (float)height; /* Green */
-// 			data[(y * width + x) * depth + 3] = 255; /* Alpha */
-// 		}
-// 	}
-// }

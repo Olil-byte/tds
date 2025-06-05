@@ -2,9 +2,12 @@
 #include "Keyboard.h"
 #include "Render.h"
 
-#include "Renderable.h"
+//#include "Renderable.h"
+#include "GameObject.h"
 
 #include <stdio.h>
+
+#include <time.h>
 
 int main(void)
 {
@@ -12,35 +15,27 @@ int main(void)
 	U::Keyboard keyboard = U::Keyboard(&window); 
 	U::Render render = U::Render(&window);
 	
-	U::IRenderable* square = new U::Square(50, 50, 50, 50);
+	U::Actor* actor = new U::Actor(&keyboard);
 
 	window.Show();
 
+	float dt = 0.0f;
+	clock_t lastTime = clock();
 	while (true)
 	{
-		keyboard.Update();
-		if (keyboard.IsKeyPressed(U::Key::W))
-		{
-			square->SetY(square->GetY() + 1);
-		}
-		if (keyboard.IsKeyPressed(U::Key::A))
-		{
-			square->SetX(square->GetX() - 1);
-		}
-		if (keyboard.IsKeyPressed(U::Key::S))
-		{
-			square->SetY(square->GetY() - 1);
-		}
-		if (keyboard.IsKeyPressed(U::Key::D))
-		{
-			square->SetX(square->GetX() + 1);
-		}
+		clock_t currentTime = clock();
+		dt = (float)(currentTime - lastTime) / CLOCKS_PER_SEC;
 		
-		render.RenderObject(square);
+		keyboard.Update();
+		actor->Update(dt);
+		
+		render.RenderObject(actor);
 		window.Display();
+
+		lastTime = currentTime;
 	}
 
-	delete square;
+	delete actor;
 
 	return 0;
 }

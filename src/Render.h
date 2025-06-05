@@ -2,7 +2,7 @@
 #define RENDER_H
 
 #include "Window.h"
-#include "Renderable.h"
+#include "GameObject.h"
 
 namespace U
 {
@@ -12,12 +12,8 @@ class Render
 public:
 	Render(Window* context);
 
-	void RenderObject(const IRenderable* renderable);
+	void RenderObject(const IGameObject* object);
 
-	// Deprecated
-	// void RenderInto(Buffer& buffer);
-	// void RenderInto(Window& window);
-	// void RenderItInto(IRenderable& renderable, Window& window);
 private:
 	Window* m_context;
 	

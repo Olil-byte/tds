@@ -24,7 +24,7 @@ obj/%.o: src/%.cpp src/%.h obj
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 tds: src/main.cpp $(OBJMODULES)
-	$(CXX) $(CXXFLAGS) $^ -lX11 -o $@
+	$(CXX) $(CXXFLAGS) $^ -lX11 -lm -o $@
 
 
 
