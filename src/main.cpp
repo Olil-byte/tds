@@ -14,31 +14,50 @@ int main(void)
 	window.Show();
 
 	XSelectInput((::Display*)window.GetDisplay(), *((::Window*)window.GetHandler()), KeyPressMask);
+	KeyCode w_key = XKeysymToKeycode((::Display*)window.GetDisplay(), XK_w);
+	KeyCode s_key = XKeysymToKeycode((::Display*)window.GetDisplay(), XK_s);
+	KeyCode a_key = XKeysymToKeycode((::Display*)window.GetDisplay(), XK_a);
+	KeyCode d_key = XKeysymToKeycode((::Display*)window.GetDisplay(), XK_d);
 	while (true)
 	{
 		int n = XPending((::Display*)window.GetDisplay());
 		for (int i = 0; i < n; i++)
 		{
-			XEvent event;
-			XNextEvent((::Display*)window.GetDisplay(), &event);
-			switch (event.type)
+			char keymap[32];
+			XQueryKeymap((::Display*)window.GetDisplay(), keymap);
+			if (keymap[w_key >> 3] & (1 << (w_key & 7)))
 			{
-			case KeyPress:
-				switch (XLookupKeysym(&event.xkey, 0))
-				{
-				case XK_a:
-					square->SetX(square->GetX() - 1);
-					break;
-				case XK_s:
-					square->SetY(square->GetY() - 1);
-					break;
-				case XK_d:
-					square->SetX(square->GetX() + 1);
-					break;
-				case XK_w:
-					square->SetY(square->GetY() + 1);
-					break;
-				}
+				square->SetY(square->GetY() + 1);
+			}
+			if (keymap[s_key >> 3] & (1 << (s_key & 7)))
+			{
+				square->SetY(square->GetY() - 1);
+			}
+			if (keymap[a_key >> 3] & (1 << (a_key & 7)))
+			{
+				square->SetX(square->GetX() - 1);
+			}
+			if (keymap[d_key >> 3] & (1 << (d_key & 7)))
+			{
+				square->SetX(square->GetX() + 1);
+			}
+			
+
+			switch (0)
+			{
+			case XK_a:
+				square->SetX(square->GetX() - 1);
+				break;
+								
+			case XK_s:
+				square->SetY(square->GetY() - 1);
+				break;
+				
+			case XK_d:
+				square->SetX(square->GetX() + 1);
+				break;
+				
+			case XK_w:
 				
 				break;
 			}
