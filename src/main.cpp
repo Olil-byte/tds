@@ -41,7 +41,7 @@ int main(void)
 		actor->Update(dt);
 		wall->Update(dt);
 
-		solver.AABBvsAABB(actor, wall);
+		solver.AABBvsAABB(actor, wall, dt);
 
 		render.RenderBackground();
 		render.RenderObject(actor);

@@ -31,7 +31,9 @@ namespace U
 	    float GetY1() { return m_y - m_h / 2; }
 	    float GetY2() { return m_y + m_h / 2;}
 
+        float GetX() { return m_x; }
 	    void SetX(float value) { m_x = value; }
+        float GetY() { return m_y; }
 	    void SetY(float value) { m_y = value; }
 
         bool IsStatic() { return m_isStatic; }
