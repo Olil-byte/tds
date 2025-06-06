@@ -41,11 +41,11 @@ int main(void)
 		actor->Update(dt);
 		wall->Update(dt);
 
+		solver.AABBvsAABB(actor, wall);
+
 		render.RenderBackground();
 		render.RenderObject(actor);
 		render.RenderObject(wall);
-
-		solver.AABBvsAABB(actor, wall);
 		
 		window.Display();
 

@@ -22,7 +22,14 @@ public:
 		b->GetY1() <= a->GetY1() && a->GetY1() <= b->GetY2());
 		if (isCollides)
 		{
-			printf("Is Collides\n");
+			Vec2d* directionA = objectA->GetDirection();
+			Vec2d* positionA = objectA->GetPosition();
+			float* speedA = objectB->GetSpeed();
+			directionA->x *= -1;
+			directionA->y *= -1;
+
+			positionA->x += directionA->x;
+			positionA->y += directionA->y;
 		}
 	}
 };
