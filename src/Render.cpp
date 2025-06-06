@@ -1,18 +1,30 @@
 #include "Render.h"
 #include "Texture.h"
 
-U::Render::Render(U::Window* context)
+U::Render::Render(U::Window* context, U::Texture* background)
 {
 	m_context = context;
+	m_background = background;
+}
+
+void U::Render::RenderBackground()
+{
+	if (m_background == nullptr)
+	{
+		return;
+	}
+	
+	U::Texture& output = m_context->GetBuffer();
+	for (auto it = output.Begin(); it != output.End(); ++it)
+	{
+		const Texel pixel = m_background->GetTexel(it.GetX(), it.GetY());
+		*it = { pixel.r, pixel.g, pixel.b, (char)255 };
+	}
 }
 
 void U::Render::RenderObject(const U::IGameObject* object)
 {
 	U::Texture& output = m_context->GetBuffer();
-	for (auto it = output.Begin(); it != output.End(); ++it)
-	{
-		*it = { (char)255, (char)255, (char)255, (char)255 };
-	}
 	
 	const U::Texture& texture = object->GetTexture();
 

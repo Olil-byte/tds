@@ -9,13 +9,24 @@
 
 #include <time.h>
 
+#include "Solver.hpp"
+
 int main(void)
 {
 	U::Window window = U::Window("tds", 800, 600);
-	U::Keyboard keyboard = U::Keyboard(&window); 
-	U::Render render = U::Render(&window);
+	U::Keyboard keyboard = U::Keyboard(&window);
+
+	U::Texture* background = new U::Texture(800, 600);
+		for (auto it = background->Begin(); it != background->End(); ++it)
+		{
+			*it = { (char)255, (char)255, (char)255, (char)255 };
+		}
+		
+	U::Render render = U::Render(&window, background);
+	U::Solver solver = U::Solver();
 	
 	U::Actor* actor = new U::Actor(&keyboard);
+	U::Wall* wall = new U::Wall();
 
 	window.Show();
 
@@ -28,14 +39,23 @@ int main(void)
 		
 		keyboard.Update();
 		actor->Update(dt);
-		
+		wall->Update(dt);
+
+		render.RenderBackground();
 		render.RenderObject(actor);
+		render.RenderObject(wall);
+
+		solver.AABBvsAABB(actor, wall);
+		
 		window.Display();
 
 		lastTime = currentTime;
 	}
 
+	delete background;
+
 	delete actor;
+	delete wall;
 
 	return 0;
 }

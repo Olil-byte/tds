@@ -10,12 +10,15 @@ namespace U
 class Render
 {
 public:
-	Render(Window* context);
+	Render(Window* context, U::Texture* background = nullptr);
 
 	void RenderObject(const IGameObject* object);
 
+	void RenderBackground();
+
 private:
 	Window* m_context;
+	U::Texture* m_background;
 	
 };
 
