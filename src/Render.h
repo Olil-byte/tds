@@ -12,7 +12,7 @@ class Render
 public:
 	Render(Window* context, U::Texture* background = nullptr);
 
-	void RenderObject(const IGameObject* object);
+	void RenderObject(const GameObject* object);
 
 	void RenderBackground();
 

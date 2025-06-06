@@ -22,16 +22,25 @@ void U::Render::RenderBackground()
 	}
 }
 
-void U::Render::RenderObject(const U::IGameObject* object)
+void U::Render::RenderObject(const U::GameObject* object)
 {
 	U::Texture& output = m_context->GetBuffer();
 	
-	const U::Texture& texture = object->GetTexture();
-
-	for (auto it = texture.CBegin(); it != texture.CEnd(); ++it)
+	const U::Texture* texture = object->GetTexture();
+	if (texture == nullptr)
 	{
-		int x = object->GetPosition().x + it.GetX();
-		int y = output.GetHeight() - (object->GetPosition().y + it.GetY());
+		return;
+	}
+	const Vec2d* position = object->GetPosition(); 
+	if (position == nullptr)
+	{
+		return;
+	}
+
+	for (auto it = texture->CBegin(); it != texture->CEnd(); ++it)
+	{
+		int x = position->x + it.GetX();
+		int y = output.GetHeight() - (position->y + it.GetY());
 
 		bool isOutOfBound = x < 0 || x >= output.GetWidth() || y < 0 || y >= output.GetHeight();
 		if (isOutOfBound)

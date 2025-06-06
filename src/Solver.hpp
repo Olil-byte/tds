@@ -1,44 +1,30 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
+#include "Colliders/Collider.h"
 #include "GameObject.h"
 #include <stdio.h>
 
 namespace U
 {
 
-class ICollider
+class Solver
 {
 public:
-	virtual ~ICollider() = default;
-};
-
-class AABB: public ICollider
-{
-public:
-	AABB(float x, float y, float w, float h) 
+	void AABBvsAABB(GameObject* objectA, GameObject* objectB)
 	{
-		m_x = x;
-		m_y = y;
-		m_w = w;
-		m_h = h;
+		AABB* a = (AABB*)objectA->GetCollider();
+		AABB* b = (AABB*)objectB->GetCollider();
+	
+		bool isCollides = (a->GetX1() <= b->GetX1() && b->GetX1() <= a->GetX2() || 
+		b->GetX1() <= a->GetX1() && a->GetX1() <= b->GetX2()) &&
+		(a->GetY1() <= b->GetY1() && b->GetY1() <= a->GetY2() || 
+		b->GetY1() <= a->GetY1() && a->GetY1() <= b->GetY2());
+		if (isCollides)
+		{
+			printf("Is Collides\n");
+		}
 	}
-	/* Projections on axises */
-	float GetX1() { return m_x - m_w / 2; }
-	float GetX2() { return m_x + m_w / 2; }
-	float GetY1() { return m_y - m_h / 2; }
-	float GetY2() { return m_y + m_h / 2;}
-
-	void SetX(float value) { m_x = value; }
-	void SetY(float value) { m_y = value; }
-	
-private:
-	/* Coords of center */
-	float m_x;
-	float m_y;
-	
-	float m_w;
-	float m_h;
 };
 
 };
